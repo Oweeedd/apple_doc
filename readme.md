@@ -1,3 +1,8 @@
+Детекция болезней яблок на датасете appledoc  с использованием модели yolo11s.
+Классы : 7
+names: ['alternaria', 'anthracnose', 'marssonina', 'scab', 'sootyblotch', 'valsacanker', 'whiterot']
+
+
 1) Создать окружение
 
     python venv venv
@@ -10,4 +15,4 @@
 
 4) Запустить стримлит 
 
-    python streamlit_server.py
+    streamlit run streamlit_server.py
