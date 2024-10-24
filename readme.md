@@ -16,3 +16,5 @@ names: ['alternaria', 'anthracnose', 'marssonina', 'scab', 'sootyblotch', 'valsa
 4) Запустить стримлит 
 
     streamlit run streamlit_server.py
+
+![image](https://github.com/user-attachments/assets/7656e1e1-9d13-4781-92a7-5b32c49cd5b9)
