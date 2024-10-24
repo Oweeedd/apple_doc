@@ -46,11 +46,9 @@ disease_info = {
 }
 
 def process_image(image):
-    # Преобразование изображения в формат, подходящий для модели
     img = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
     results = model.predict(img)
     
-    # Обработка результатов
     for result in results:
         boxes = result.boxes.cpu().numpy()
         for box in boxes:
@@ -58,14 +56,12 @@ def process_image(image):
             cv2.rectangle(img, r[:2], r[2:], (0, 255, 0), 2)
             cv2.putText(img, model.names[box.cls[0]], (r[0], r[1] - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 0), 2)
     
-    # Перевод изображения обратно в формат RGB
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     return img, results
 
 def main():
     st.title("Детекция болезней яблони")
     
-    # Выбор изображения из папки test_images или загрузка пользовательского изображения
     test_images_folder = 'test_images'
     test_images = [f for f in os.listdir(test_images_folder) if f.endswith(('.jpg', '.jpeg', '.png'))]
     
@@ -81,7 +77,6 @@ def main():
             processed_image, results = process_image(image)
             st.image(processed_image, caption='Результат детекции', use_column_width=True)
             
-            # Информация о болезни
             detected = False
             for result in results:
                 boxes = result.boxes.cpu().numpy()
@@ -93,7 +88,6 @@ def main():
                         st.write(f"Болезнь: {class_name}, Уверенность: {confidence:.2f}")
                         detected = True
 
-                        # Вывод дополнительной информации
                         if class_name in disease_info:
                             st.subheader(f"Информация о {class_name}")
                             st.write(f"**Описание:** {disease_info[class_name]['description']}")
@@ -112,7 +106,6 @@ def main():
             processed_image, results = process_image(image)
             st.image(processed_image, caption='Результат детекции', use_column_width=True)
             
-            # Информация о болезни
             detected = False
             for result in results:
                 boxes = result.boxes.cpu().numpy()
@@ -124,7 +117,6 @@ def main():
                         st.write(f"Болезнь: {class_name}, Уверенность: {confidence:.2f}")
                         detected = True
 
-                        # Вывод дополнительной информации
                         if class_name in disease_info:
                             st.subheader(f"Информация о {class_name}")
                             st.write(f"**Описание:** {disease_info[class_name]['description']}")
